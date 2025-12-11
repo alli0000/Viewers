@@ -59,6 +59,7 @@ COPY --parents ./addOns/package.json ./addOns/*/*/package.json ./extensions/*/pa
 # Run the install before copying the rest of the files
 
 RUN bun pm cache rm
+ENV CYPRESS_INSTALL_BINARY=0
 RUN bun install
 RUN bun add ajv@8.12.0
 # Copy the local directory
