@@ -32,7 +32,11 @@ const getViewportVolumeHistogram = async (viewport, volume, options?) => {
     const targetTimePoint = volume.numTimePoints - 1; // or any other time point you need
     scalarData = volume.voxelManager.getTimePointScalarData(targetTimePoint);
   } else {
-    scalarData = volume.voxelManager.getCompleteScalarDataArray();
+    try {
+      scalarData = volume.voxelManager.getScalarData();
+    } catch (e) {
+      return undefined;
+    }
   }
 
   if (!scalarData?.length) {
